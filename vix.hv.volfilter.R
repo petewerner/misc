@@ -39,6 +39,7 @@ perf_details <- function(rets, verbose=TRUE)
 {
 	if (verbose) cat('.')
 	final_ret <- exp(sum(na.omit(rets))) - 1
+	return(final_ret)
 	if (verbose) cat('.')	
 	ann_ret <- Return.annualized(rets)
 	if (verbose) cat('.')
@@ -101,15 +102,17 @@ comp_rets <- function(sym, n=63, hv_n=21, hv_thresh=0.60, curves=FALSE, verbose=
 	
 	if (verbose) cat(' building performance details ')
 	outdata <- sapply(retlist, perf_details, verbose)
-	colnames(outdata) <- c('Base', 'HV', 'MA', 'HV_MA')
-	rownames(outdata) <- c('Final', 'Ann.Ret', 'Ann.Sd', 'Sharpe', 'MaxDD')	
+	cat(me, n, outdata, '\n')
+#	colnames(outdata) <- c('Base', 'HV', 'MA', 'HV_MA')
+	#rownames(outdata) <- c('Final', 'Ann.Ret', 'Ann.Sd', 'Sharpe', 'MaxDD')	
+#	rownames(outdata) <- c('Final')	
 	if (verbose) cat(' done\n')
 	return(outdata)
 }
 
 symenv <- new.env()
-getSymbols(c('^GSPC', '^RUT', '^NDX'), env=symenv, from="2007-01-01")
-
+getSymbols(c('^GSPC', '^RUT', '^NDX'), env=symenv, from="1980-01-01")
+getSymbols(c('^NDX'), env=symenv, from="1980-01-01")
 perfdata <- lapply(symenv, comp_rets)
 #you can look at the equity curves instead
 #curves <- lapply(symenv, comp_rets, curves=T)

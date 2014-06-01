@@ -2,6 +2,9 @@
 # some attractors in R - Pete Werner, 2013
 ####
 # post here: http://petewerner.blogspot.com/2013/11/just-for-fun-attractors-in-r.html
+#
+# faster vers: https://github.com/petewerner/misc/blob/master/attractor.R
+#
 # see also:
 # http://paulbourke.net/fractals/peterdejong/
 # http://paulbourke.net/fractals/clifford/
